@@ -1,0 +1,89 @@
+/* Google Web Font */
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500&display=swap');
+
+/* Fontawesome 4.7 */
+@import url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+
+
+/* 중앙정렬 */
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/*  */
+.item{
+    width: 300px;
+    margin: 10px;
+    position: relative;   /*item안에 있는 아이콘 요소의 위치를 고정시키기 위해*/
+}
+
+.item input[type=text],
+.item input[type=tel],
+.item input[type=email]{
+    border : 1px solid lightgray;
+    height: 40px;
+    width: inherit;   /*부모따라 300px*/
+
+    border-radius: 5px;
+    padding: 10px;
+    box-sizing: border-box;  /*padding한 만큼 박스 크기 늘어나지 않게 함 */
+
+    padding-left: 50px;     /*좌측에 있는 아이콘만큼 피해서 input태그가 위치됨*/
+
+    outline: none;          /*form태그 클릭시 외곽선이 변하는 거 -> 없앰*/
+    transition: 0.3s;
+    
+}
+
+.item .fa{
+    /* 부모인 item가 relative이므로, 자식인 fa(fontawesome icon태그)태그의 위치를
+    고정적인 위치로 설정가능 -> 제일 좌측에 위치하게 함(why, form태그는 before를 못쓰니까) */
+    position: absolute;
+    top : 0;
+    left : 0;
+    color : #fff;
+    background-color: gray;
+    border-radius: 5px 0 0 5px;  /*4개의 숫자를 적어주면 시계방향으로 적용함 왼쪽상단 오른쪽상 오른쩍하단, 왼쪽하단*/
+    font-size: 20px;     /*font-awesome에서는 내부 아이콘을 font로 취급하므로, font 크기를 줄이면 아이콘 크기가 줄어듬*/
+    width: 40px;
+    text-align: center;  /*fontawesome의 아이콘그림이 중앙 정렬됨*/
+    height: 40px;
+    line-height: 40px;  /*높이값만큼 line-height를 주면 세로 중앙정렬됨*/
+    transition: 0.2s;
+}
+
+/* input을 클릭했을 때 focus라는 가상클래스를 줘서 효과주기 */
+/* input에 클릭이 되면, 자기자신을 어떻게 할 것인지 */
+/* focus는 input태그에서만 사용가능 */
+.item input[type=text]:focus,
+.item input[type=tel]:focus,
+.item input[type=email]:focus{
+    border : 1px solid dodgerblue;
+    box-shadow: 0 0 5px dodgerblue;
+}
+
+/* input태그 클릭시 아이콘 색깔 변하게 하기 
+인접선택자 이용하기
+인접선택자는 무조건 바로 옆에 있는 선택자만 선택가능
+코드상 위에 있는 게 아닌, 아래에 있는 인접 선택자만 선택가능(+)
+형제는 ~로 불러올 수 있음
+*/
+
+/*  input포커스 됐을 때, input에 인접한 .fa클래스에 효과를 준다. 
+<input type="text" placeholder="Your Name">
+<i class="fa fa-user"></i>  
+-> i태그에 효과를 줌
+*/
+.item input:focus + .fa{
+    background-color : dodgerblue;
+
+}
+
+/* focus됐을 때 placeholder없애기, focus없을 때 placeholder생기게하기 */
+/* input이 focus됐을 때, 자기자신::의 placeholder속성을 이렇게 하겠다. */
+.item input:focus::placeholder{
+    visibility: hidden;
+}
